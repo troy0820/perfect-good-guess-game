@@ -39,7 +39,12 @@ func checkAnswer(n numbers, g numbers) []string {
 func main() {
 	//Flag for amount of numbers you want to guess
 	number := flag.Int("number", 3, "a number")
+
 	flag.Parse()
+	if *number < 3 {
+		fmt.Println("At least try 3 numbers")
+		os.Exit(1)
+	}
 	s := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(s)
 	var nums numbers
