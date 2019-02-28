@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -50,6 +51,7 @@ func main() {
 		fmt.Println("Enter your guess: ")
 		text, _ := reader.ReadString('\n')
 		var guess numbers
+		text = strings.Replace(text, " ", "", -1)
 		for _, v := range text {
 			num, _ := strconv.Atoi(string(v))
 			guess = append(guess, num)
