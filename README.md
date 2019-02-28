@@ -6,10 +6,10 @@
 
 ```bash
 git clone github.com/troy0820/pefect-good-guess-game
-go run guess.go
+go run guess.go -number 4 (without flag it defaults to 3)
 
 Enter your guess:
-1 2 3
+1 2 3 4
 ```
 
-When you see got it, you have won.
+When you see "You Got It!", you have won.

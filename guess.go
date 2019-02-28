@@ -37,21 +37,25 @@ func checkAnswer(n numbers, g numbers) []string {
 }
 
 func main() {
+	//Flag for amount of numbers you want to guess
 	number := flag.Int("number", 3, "a number")
 	flag.Parse()
 	s := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(s)
 	var nums numbers
+	//Random numbers in a slice
 	for i := 0; i < *number; i++ {
 		nums = append(nums, r.Intn(9))
 	}
 	reader := bufio.NewReader(os.Stdin)
 	loop := true
+	//Boolean controlled loop
 	for loop == true {
+		//Get input from stdin
 		fmt.Println("Enter your guess: ")
 		text, _ := reader.ReadString('\n')
 		var guess numbers
-		text = strings.Replace(text, " ", "", -1)
+		text = strings.Replace(text, " ", "", -1) //strip white space from text
 		for _, v := range text {
 			num, _ := strconv.Atoi(string(v))
 			guess = append(guess, num)
@@ -65,7 +69,7 @@ func main() {
 			}
 		}
 		if perfect == len(answer) {
-			fmt.Println("got it")
+			fmt.Println("You Got It!")
 			break
 		}
 		fmt.Println("Your guess", guess)
