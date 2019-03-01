@@ -12,4 +12,9 @@ Enter your guess:
 1 2 3 4
 ```
 
+```bash
+node index.js -d 3
+Enter your guess:
+123
+```
 When you see "You Got It!", you have won.
