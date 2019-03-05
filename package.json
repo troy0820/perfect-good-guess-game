@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node index.js"
+    "start": "node index.js",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix"
   },
   "keywords": [
     "commander",
@@ -16,5 +18,9 @@
   "dependencies": {
     "commander": "^2.19.0",
     "promptly": "^3.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.0",
+    "eslint-config-cloudreach": "^1.0.2"
   }
 }
