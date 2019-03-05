@@ -39,8 +39,6 @@ async function main() {
                 console.log('You got it');
                 break;
             }
-
-
         }
     } else {
         console.log('Check input to program: needs -d with number');
