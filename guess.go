@@ -53,9 +53,7 @@ func main() {
 		nums = append(nums, r.Intn(9))
 	}
 	reader := bufio.NewReader(os.Stdin)
-	loop := true
-	//Boolean controlled loop
-	for loop == true {
+	for true {
 		//Get input from stdin
 		fmt.Println("Enter your guess: ")
 		text, _ := reader.ReadString('\n')
