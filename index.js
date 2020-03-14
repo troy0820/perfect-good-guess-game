@@ -1,10 +1,10 @@
-'use strict';
+//'use strict';
 //command line app 3 digit number try to guess
 //perfect good bad
 //-d number of digits prompt user for answer
 
-const program = require('commander');
-const promptly = require('promptly');
+import program from 'commander';
+import promptly from 'promptly';
 
 program
     .version('0.0.1')
@@ -27,7 +27,7 @@ async function main() {
         const loop = true;
         while (loop) {
             const guess = await promptly.prompt('Enter your guess');
-            const answers = checkAnswer(guess, newAnswer);
+            const answers = await checkAnswer(guess, newAnswer);
             console.log('answers', answers);
             let perfect = 0;
             for (let i = 0; i < newAnswer.length; i++) {
@@ -46,17 +46,19 @@ async function main() {
 }
 
 function checkAnswer(guess, answer) {
+  return new Promise( (resolve)=> {
     const arr = [];
     for (let i = 0; i < guess.length; i++) {
         if (guess[i] == answer[i]) {
-            arr.push('perfect');
-        } else if (checkIncludes(answer, guess[i])) {
-            arr.push('good');
-        } else {
-            arr.push('bad');
-        }
-    }
-    return arr;
+            	arr.push('perfect');
+        	} else if (checkIncludes(answer, guess[i])) {
+        	    arr.push('good');
+        	} else {
+      		      arr.push('bad');
+        	}
+    	}
+    	resolve(arr);
+	})
 }
 
 function checkIncludes(answer, guess) {

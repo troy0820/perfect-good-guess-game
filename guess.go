@@ -27,7 +27,7 @@ func checkAnswer(n numbers, g numbers) []string {
 	for i := 0; i < len(n); i++ {
 		if n[i] == g[i] {
 			s = append(s, "perfect")
-		} else if checkIncludes(n, g[i]) == true {
+		} else if checkIncludes(n, g[i]) {
 			s = append(s, "good")
 		} else {
 			s = append(s, "bad")
@@ -36,12 +36,33 @@ func checkAnswer(n numbers, g numbers) []string {
 	return s
 }
 
+type number int
+
+type Num struct {
+	number
+}
+
+func (n *Num) Set(s string) error {
+	num, _ := strconv.Atoi(s)
+	n.number = number(num)
+	return nil
+}
+
+func (n number) String() string {
+	return strconv.Itoa(int(n))
+}
+
+func NumFlag(s string, n number, usage string) *number {
+	f := Num{n}
+	flag.CommandLine.Var(&f, s, usage)
+	return &f.number
+}
+
 func main() {
 	//Flag for amount of numbers you want to guess
-	number := flag.Int("number", 3, "a number")
-
+	number := NumFlag("number", 3, "a number")
 	flag.Parse()
-	if *number < 3 {
+	if int(*number) < 3 {
 		fmt.Println("At least try 3 numbers")
 		os.Exit(1)
 	}
@@ -49,11 +70,11 @@ func main() {
 	r := rand.New(s)
 	var nums numbers
 	//Random numbers in a slice
-	for i := 0; i < *number; i++ {
+	for i := 0; i < int(*number); i++ {
 		nums = append(nums, r.Intn(9))
 	}
 	reader := bufio.NewReader(os.Stdin)
-	for true {
+	for {
 		//Get input from stdin
 		fmt.Println("Enter your guess: ")
 		text, _ := reader.ReadString('\n')
@@ -77,5 +98,6 @@ func main() {
 		}
 		fmt.Println("Your guess", guess)
 		fmt.Println("answer", answer)
+		//		fmt.Println("this is answer", answer)
 	}
 }

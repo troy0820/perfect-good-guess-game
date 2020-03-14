@@ -3,9 +3,12 @@ package main
 import (
 	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCheckIncludes(t *testing.T) {
+	t.Parallel()
 	answer := 3
 	guess := []int{1, 1, 3}
 
@@ -23,6 +26,7 @@ func TestCheckIncludes(t *testing.T) {
 }
 
 func TestCheckAnswer(t *testing.T) {
+	t.Parallel()
 	guess := []int{3, 4, 5}
 	testGuess := []int{3, 4, 5}
 	answer := []string{"perfect", "perfect", "perfect"}
@@ -37,5 +41,10 @@ func TestCheckAnswer(t *testing.T) {
 		if want, got := false, reflect.DeepEqual(answer, checkAnswer(guess, wrong)); got != want {
 			t.Errorf("Error: This is what we want %+v, and this is what you got %+v", answer, checkAnswer(guess, wrong))
 		}
+	})
+
+	includes := []int{4, 4, 4}
+	t.Run("Test if check includes", func(t *testing.T) {
+		assert.Equal(t, checkAnswer(guess, includes), []string{"good", "perfect", "good"}, "These are not equal")
 	})
 }
