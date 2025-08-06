@@ -21,7 +21,7 @@
     "promptly": "^3.0.3"
   },
   "devDependencies": {
-    "eslint": "^5.15.0",
+    "eslint": "^9.32.0",
     "eslint-config-cloudreach": "^1.0.2"
   }
 }
